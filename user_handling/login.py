@@ -1,10 +1,14 @@
+import os
 import tkinter as tk
 from tkinter import messagebox
 import json
 from homepage.homepage import show_homepage
 
-# Path to the user data file
-user_data_file = "users.json"
+# Get the directory where this script is located
+script_dir = os.path.dirname(__file__)
+
+# Path to the user data file inside the 'user_handling' folder
+user_data_file = os.path.join(script_dir, "users.json")
 
 # Load existing users from file
 def load_users():

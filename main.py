@@ -1,5 +1,5 @@
 import tkinter as tk
-from login import login_user, register_user
+from user_handling.login import login_user, register_user
 
 # Function to start the login window
 def start_login():
@@ -7,6 +7,7 @@ def start_login():
 
     login_window = tk.Tk()
     login_window.title("Login System")
+    login_window.state('zoomed')  # Maximize window
 
     # Login section
     label_login = tk.Label(login_window, text="Login", font=("Arial", 14))
