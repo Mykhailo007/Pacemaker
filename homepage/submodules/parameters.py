@@ -7,7 +7,9 @@ def create_parameters(frame):
         "Atrial Amplitude": 2.5, 
         "Atrial Pulse Width": 0.4, 
         "Ventricular Amplitude": 3.0, 
-        "Ventricular Pulse Width": 0.6 
+        "Ventricular Pulse Width": 0.6,
+        "Atrial Refactory Period": 10,
+        "Ventricular Refactory Period": 15
     } 
  
     entries = {} 

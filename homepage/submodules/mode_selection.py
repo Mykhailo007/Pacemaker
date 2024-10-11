@@ -7,3 +7,4 @@ def create_mode_dropdown(frame):
     dropdown = tk.OptionMenu(frame, variable, *modes) 
     dropdown.pack(anchor="nw") 
     return variable 
+
