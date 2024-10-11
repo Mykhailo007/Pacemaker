@@ -1,0 +1,2 @@
+add multiple language functions
+hash the passwords to make them secure
