@@ -1,0 +1,13 @@
+{
+  "welcome": "Welkom bij Diddy's API!",
+  "register": "Registreren",
+  "login": "Inloggen",
+  "enter_username": "Gebruikersnaam invoeren",
+  "enter_password": "Wachtwoord invoeren",
+  "submit": "Indienen",
+  "error_max_users": "Fout: Maximum aantal gebruikers bereikt",
+  "error_user_exists": "Gebruiker bestaat al",
+  "success_registration": "Succes, je bent nu geregistreerd!",
+  "login_success": "Inloggen succesvol, welkom terug {}!",
+  "login_error": "Gebruikersnaam of wachtwoord is incorrect."
+}

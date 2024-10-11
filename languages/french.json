@@ -1,0 +1,13 @@
+{
+  "welcome": "Bienvenue sur l'API de Diddy!",
+  "register": "S'inscrire",
+  "login": "Connexion",
+  "enter_username": "Entrez le nom d'utilisateur",
+  "enter_password": "Entrez le mot de passe",
+  "submit": "Soumettre",
+  "error_max_users": "Erreur : Nombre maximum d'utilisateurs atteint",
+  "error_user_exists": "L'utilisateur existe déjà",
+  "success_registration": "Succès, vous êtes maintenant inscrit !",
+  "login_success": "Connexion réussie, bienvenue {} !",
+  "login_error": "Nom d'utilisateur ou mot de passe incorrect."
+}
