@@ -44,7 +44,10 @@ def start_login():
     menu.add_cascade(label="Language", menu=language_menu)
     language_menu.add_command(label="English", command=lambda: set_language('english'))
     language_menu.add_command(label="Dutch", command=lambda: set_language('dutch'))
+    language_menu.add_command(label="Danish", command=lambda: set_language('danish'))
     language_menu.add_command(label="French", command=lambda: set_language('french'))
+    language_menu.add_command(label="German", command=lambda: set_language('german'))
+    language_menu.add_command(label="Italian", command=lambda: set_language('italian'))
     language_menu.add_command(label="Spanish", command=lambda: set_language('spanish'))
     language_menu.add_command(label="Swedish", command=lambda: set_language('swedish'))
 

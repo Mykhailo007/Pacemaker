@@ -1,0 +1,14 @@
+{
+  "register": "Registrer",
+  "login": "Log ind",
+  "username": "Brugernavn",
+  "password": "Adgangskode",
+  "enter_username": "Indtast brugernavn",
+  "enter_password": "Indtast din adgangskode",
+  "submit": "Indsend",
+  "error_max_users": "Fejl: Maksimalt antal brugere nået",
+  "error_user_exists": "Brugeren findes allerede",
+  "success_registration": "Registrering fuldført, du er nu registreret!",
+  "login_success": "Login vellykket, velkommen tilbage {}!",
+  "login_error": "Brugernavn eller adgangskode er forkert."
+}
