@@ -23,8 +23,8 @@ def update_ui_texts():
     label_register.config(text=current_language["register"])
     label_register_username.config(text=current_language["username"])
     label_register_password.config(text=current_language["password"])
-    register_button.config(text=current_language["login"])
-    login_button.config(text=current_language["register"])
+    register_button.config(text=current_language["register"])
+    login_button.config(text=current_language["login"])
     entry_login_username.delete(0, tk.END)
     entry_login_password.delete(0, tk.END)
 
