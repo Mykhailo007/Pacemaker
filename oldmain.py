@@ -1,9 +1,7 @@
-# login_page/login.py
 import tkinter as tk
-from tkinter import messagebox, Menu
-from homepage.homepage import show_homepage
+from tkinter import Menu
 import json
-from user_data.user_auth import register_user, authenticate_user
+from user_handling.login import login_user, register_user
 
 def load_language(lang='english'):
     with open(f"languages/{lang}.json", 'r', encoding='utf-8') as file:
@@ -19,25 +17,26 @@ def set_language(lang):
     
 def update_ui_texts():
     global label_login, label_username, label_password, label_register, label_register_username, label_register_password, register_button, login_button
-    #login_window.config(text=current_language["login"])
+    label_login.config(text=current_language["login"])
     label_username.config(text=current_language["username"])
     label_password.config(text=current_language["password"])
-    #label_register.config(text=current_language["register"])
+    label_register.config(text=current_language["register"])
     label_register_username.config(text=current_language["username"])
     label_register_password.config(text=current_language["password"])
     register_button.config(text=current_language["register"])
     login_button.config(text=current_language["login"])
-    entry_username.delete(0, tk.END)
-    entry_password.delete(0, tk.END)
+    entry_login_username.delete(0, tk.END)
+    entry_login_password.delete(0, tk.END)
 
+# Function to start the login window
+def start_login():
+    global entry_login_username, entry_login_password, entry_register_username, entry_register_password
+    global label_login, label_username, label_password, label_register, label_register_username, label_register_password, register_button, login_button
 
-def show_login_page():
-    global entry_username, entry_password, entry_register_username, entry_register_password
-    global label_username, label_password, label_register_username, label_register_password, register_button, login_button
-    global login_window
     login_window = tk.Tk()
-    login_window.title("Login")
-    
+    login_window.title("Login System")
+    login_window.state('zoomed')  # Maximize window
+
     # Menu for language selection
     menu = Menu(login_window)
     login_window.config(menu=menu)
@@ -52,49 +51,42 @@ def show_login_page():
     language_menu.add_command(label="Spanish", command=lambda: set_language('spanish'))
     language_menu.add_command(label="Swedish", command=lambda: set_language('swedish'))
 
+    # Login section
+    label_login = tk.Label(login_window, text="Login", font=("Arial", 14))
+    label_login.grid(row=0, column=0, padx=10, pady=10)
+
     label_username = tk.Label(login_window, text="Username")
-    label_username.grid(row=0, column=0, padx=10, pady=5)
-    entry_username = tk.Entry(login_window)
-    entry_username.grid(row=0, column=1, padx=10, pady=5)
+    label_username.grid(row=1, column=0, padx=10, pady=5)
+    entry_login_username = tk.Entry(login_window)
+    entry_login_username.grid(row=1, column=1, padx=10, pady=5)
 
     label_password = tk.Label(login_window, text="Password")
-    label_password.grid(row=1, column=0, padx=10, pady=5)
-    entry_password = tk.Entry(login_window, show="*")
-    entry_password.grid(row=1, column=1, padx=10, pady=5)
+    label_password.grid(row=2, column=0, padx=10, pady=5)
+    entry_login_password = tk.Entry(login_window, show="*")
+    entry_login_password.grid(row=2, column=1, padx=10, pady=5)
 
-    login_button = tk.Button(login_window, text="Login", command=lambda: login_user(entry_username, entry_password))
-    login_button.grid(row=2, column=0, columnspan=2, pady=10)
+    login_button = tk.Button(login_window, text="Login", command=lambda: login_user(entry_login_username, entry_login_password, login_window, start_login))
+    login_button.grid(row=3, column=0, columnspan=2, pady=10)
+
+    # Registration section
+    label_register = tk.Label(login_window, text="Register", font=("Arial", 14))
+    label_register.grid(row=4, column=0, padx=10, pady=10)
 
     label_register_username = tk.Label(login_window, text="Username")
-    label_register_username.grid(row=3, column=0, padx=10, pady=5)
+    label_register_username.grid(row=5, column=0, padx=10, pady=5)
     entry_register_username = tk.Entry(login_window)
-    entry_register_username.grid(row=3, column=1, padx=10, pady=5)
+    entry_register_username.grid(row=5, column=1, padx=10, pady=5)
 
     label_register_password = tk.Label(login_window, text="Password")
-    label_register_password.grid(row=4, column=0, padx=10, pady=5)
+    label_register_password.grid(row=6, column=0, padx=10, pady=5)
     entry_register_password = tk.Entry(login_window, show="*")
-    entry_register_password.grid(row=4, column=1, padx=10, pady=5)
+    entry_register_password.grid(row=6, column=1, padx=10, pady=5)
 
-    register_button = tk.Button(login_window, text="Register", command=lambda: register_user_gui(entry_register_username, entry_register_password))
-    register_button.grid(row=5, column=0, columnspan=2, pady=10)
+    register_button = tk.Button(login_window, text="Register", command=lambda: register_user(entry_register_username, entry_register_password))
+    register_button.grid(row=7, column=0, columnspan=2, pady=10)
 
     update_ui_texts()
     login_window.mainloop()
 
-def register_user_gui(username_entry, password_entry):
-    username = username_entry.get()
-    password = password_entry.get()
-    success, message = register_user(username, password)
-    if success:
-        messagebox.showinfo("Success", message)
-    else:
-        messagebox.showerror("Error", message)
-
-def login_user(username_entry, password_entry):
-    username = username_entry.get()
-    password = password_entry.get()
-    if authenticate_user(username, password):
-        login_window.destroy()
-        show_homepage(username)
-    else:
-        messagebox.showerror("Error", "Invalid username or password")
+# Start the login process
+start_login()
