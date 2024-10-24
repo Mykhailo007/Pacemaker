@@ -1,6 +1,5 @@
 # homepage/submodules/mode_selection.py
 import tkinter as tk
-from tkinter import messagebox
 import json
 import os
 
@@ -57,17 +56,6 @@ def create_parameters(frame):
         "Ventricular Refactory Period": 15
     }
 
-    upper_limits = {
-    "Lower Rate Limit": 50,
-    "Upper Rate Limit": 200,
-    "Atrial Amplitude": 5.0,
-    "Atrial Pulse Width": 1.0,
-    "Ventricular Amplitude": 5.5,
-    "Ventricular Pulse Width": 1.2,
-    "Atrial Refactory Period": 20,
-    "Ventricular Refactory Period": 30
-    }
-
     entries = {}
     for param, value in default_params.items():
         param_label = tk.Label(frame, text=param)
@@ -77,17 +65,6 @@ def create_parameters(frame):
         entry.insert(0, str(value))
         entry.pack()
 
-
-        def validate_input(value, param=param):
-            try:
-                if float(value) > upper_limits[param]:
-                    messagebox.showerror("Input Error", f"{param} cannot exceed {upper_limits[param]}")
-                    entry.delete(0, tk.END)
-                    entry.insert(0, str(upper_limits[param]))
-            except ValueError:
-                pass 
-
-        entry.bind("<FocusOut>", lambda event, param=param: validate_input(entry.get(), param))
         entries[param] = entry
 
 
