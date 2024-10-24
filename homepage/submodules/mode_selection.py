@@ -72,10 +72,11 @@ def create_parameters(frame):
     for param, value in default_params.items():
         param_label = tk.Label(frame, text=param)
         param_label.pack()
-        
+
         entry = tk.Entry(frame)
         entry.insert(0, str(value))
         entry.pack()
+
 
         def validate_input(value, param=param):
             try:
