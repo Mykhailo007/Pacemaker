@@ -1,0 +1,14 @@
+{
+  "register": "Registrieren",
+  "login": "Anmelden",
+  "username": "Benutzername",
+  "password": "Passwort",
+  "enter_username": "Benutzernamen eingeben",
+  "enter_password": "Passwort eingeben",
+  "submit": "Absenden",
+  "error_max_users": "Fehler: Maximale Benutzerzahl erreicht",
+  "error_user_exists": "Benutzer existiert bereits",
+  "success_registration": "Erfolgreiche Registrierung, Sie sind nun registriert!",
+  "login_success": "Anmeldung erfolgreich, willkommen zurück {}!",
+  "login_error": "Benutzername oder Passwort ist falsch."
+}

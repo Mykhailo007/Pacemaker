@@ -1,0 +1,14 @@
+{
+  "register": "Registrati",
+  "login": "Accedi",
+  "username": "Nome utente",
+  "password": "Password",
+  "enter_username": "Inserisci il nome utente",
+  "enter_password": "Inserisci la password",
+  "submit": "Invia",
+  "error_max_users": "Errore: Numero massimo di utenti raggiunto",
+  "error_user_exists": "L'utente esiste già",
+  "success_registration": "Registrazione avvenuta con successo, sei ora registrato!",
+  "login_success": "Accesso avvenuto con successo, bentornato {}!",
+  "login_error": "Nome utente o password non corretti."
+}
