@@ -77,21 +77,23 @@ def create_parameters(frame):
         entry.insert(0, str(value))
         entry.pack()
 
+        entry.bind("<FocusOut>", lambda event, e=entry, p=param: validate_input(e, p, upper_limits))
 
-        def validate_input(value, param=param):
-            try:
-                if float(value) > upper_limits[param]:
-                    messagebox.showerror("Input Error", f"{param} cannot exceed {upper_limits[param]}")
-                    entry.delete(0, tk.END)
-                    entry.insert(0, str(upper_limits[param]))
-            except ValueError:
-                pass 
-
-        entry.bind("<FocusOut>", lambda event, param=param: validate_input(entry.get(), param))
         entries[param] = entry
 
 
     return entries, default_params
+
+def validate_input(entry, param, upper_limits):
+
+    try:
+        value = float(entry.get())
+        if value > upper_limits[param]:
+            messagebox.showerror("Input Error", f"{param} cannot exceed {upper_limits[param]}")
+            entry.delete(0, tk.END)
+            entry.insert(0, str(upper_limits[param]))
+    except ValueError:
+        messagebox.showerror("Input Error", f"Invalid input for {param}. Please enter a number.")
 
 def create_save_button(frame, username, variable, entries):
     def save_params():
