@@ -8,5 +8,22 @@
   "error_user_exists": "Gebruiker bestaat al",
   "success_registration": "Succes, je bent nu geregistreerd!",
   "login_success": "Inloggen succesvol, welkom terug {}!",
-  "login_error": "Gebruikersnaam of wachtwoord is incorrect."
+  "login_error": "Gebruikersnaam of wachtwoord is incorrect.",
+  "close": "Sluiten",
+  "logout": "Uitloggen",
+  "logged_out": "Je bent nu uitgelogd.",
+  "logged_in": "Je bent nu ingelogd als {}.",
+  "error": "Fout",
+  "success": "Succes",
+  "username": "Gebruikersnaam",
+  "password": "Wachtwoord",
+  "confirm_password": "Bevestig wachtwoord",
+  "passwords_no_match": "Wachtwoorden komen niet overeen",
+  "error_password_length": "Wachtwoord moet minimaal 6 tekens lang zijn",
+  "error_username_length": "Gebruikersnaam moet minimaal 3 tekens lang zijn",
+  "error_username_exists": "Gebruikersnaam bestaat al",
+  "error_invalid_username": "Gebruikersnaam is ongeldig",
+  "error_invalid_password": "Wachtwoord is ongeldig",
+  "error_invalid_confirm_password": "Bevestig wachtwoord is ongeldig",
+  "error_missing_fields": "Vul alle velden in"
 }

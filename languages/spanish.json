@@ -8,5 +8,6 @@
   "error_user_exists": "El usuario ya existe",
   "success_registration": "Éxito, ¡ahora estás registrado!",
   "login_success": "Inicio de sesión exitoso, ¡bienvenido de nuevo {}!",
-  "login_error": "El nombre de usuario o la contraseña son incorrectos."
+  "login_error": "El nombre de usuario o la contraseña son incorrectos.",
+  "close": "Cerrar"
 }
