@@ -1,35 +1,18 @@
+# homepage.py
 import tkinter as tk
-from .submodules.connection import display_connection_status
-from .submodules.mode_selection import create_mode_dropdown
-from .submodules.parameters import create_parameters
-from .submodules.user_actions import create_save_button
+from homepage.submodules.mode_selection import create_mode_dropdown, create_parameters, create_save_button
+from .submodules.logout.logout import logout
 
- 
-def show_homepage(): 
-    root = tk.Tk() 
-    root.title("Pacemaker Settings")
-    root.state('zoomed')  # Maximize window
+def show_homepage(username):
+    root = tk.Tk()
+    frame = tk.Frame(root)
+    frame.pack()
 
- 
-    top_frame = tk.Frame(root) 
-    top_frame.pack(pady=10) 
- 
-    param_frame = tk.Frame(root) 
-    param_frame.pack(pady=10) 
- 
-    display_connection_status(top_frame) 
-    mode_var = create_mode_dropdown(top_frame) 
- 
-    entries = create_parameters(param_frame) 
-    create_save_button(root, entries) 
+    entries, default_params = create_parameters(frame)
+    variable = create_mode_dropdown(frame, username, entries, default_params)
+    create_save_button(frame, username, variable, entries)
 
-    # Logout button
-    logout_button = tk.Button(root, text="Logout", font=("Arial", 14), command=lambda: logout_user(root))
-    logout_button.pack(pady=20)
- 
-    root.mainloop() 
+    logout_button = tk.Button(frame, text="Logout", command=lambda: logout(root))
+    logout_button.pack()
 
-def logout_user(homepage_window):
-    homepage_window.destroy()  # Close the homepage window
-    from main import start_login  # Import here to avoid circular dependency issues
-    start_login()  # Go back to login screen
+    root.mainloop()
