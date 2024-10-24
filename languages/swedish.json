@@ -1,9 +1,8 @@
 {
-  "welcome": "Välkommen till Diddys API!",
   "register": "Registrera",
   "login": "Logga in",
-  "enter_username": "Ange användarnamn",
-  "enter_password": "Ange lösenord",
+  "username": "Användarnamn",
+  "password": "Lösenord",
   "submit": "Skicka",
   "error_max_users": "Fel: Max antal användare nått",
   "error_user_exists": "Användaren finns redan",

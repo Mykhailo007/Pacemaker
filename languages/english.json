@@ -1,7 +1,8 @@
 {
-  "welcome": "Welcome to Diddy's AP!",
   "register": "Register",
   "login": "Login",
+  "username": "Username",
+  "password": "Password",
   "enter_username": "Enter username",
   "enter_password": "Enter your paswsord",
   "submit": "Submit",
