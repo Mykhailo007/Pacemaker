@@ -1,2 +1,0 @@
-add multiple language functions - german, danish, italian
-hash the passwords to make them secure
