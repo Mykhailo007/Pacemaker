@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class ParameterManager:
     def __init__(self, frame):
@@ -12,6 +13,16 @@ class ParameterManager:
             "Ventricular Pulse Width": 0.6,
             "Atrial Refactory Period": 10,
             "Ventricular Refactory Period": 15
+        }
+        self.max_values = {
+            "Lower Rate Limit": 50,
+            "Upper Rate Limit": 200,
+            "Atrial Amplitude": 5.0,
+            "Atrial Pulse Width": 1.0,
+            "Ventricular Amplitude": 5.5,
+            "Ventricular Pulse Width": 1.2,
+            "Atrial Refactory Period": 20,
+            "Ventricular Refactory Period": 30
         }
         self.entries = self.create_parameters()
 
@@ -37,3 +48,11 @@ class ParameterManager:
             if param in self.entries:
                 self.entries[param].delete(0, tk.END)
                 self.entries[param].insert(0, str(value))
+
+    def validate_parameters(self):
+        for param, entry in self.entries.items():
+            value = float(entry.get())
+            if value > self.max_values[param]:
+                messagebox.showerror("Error", f"{param} exceeds the maximum value of {self.max_values[param]}")
+                return False
+        return True

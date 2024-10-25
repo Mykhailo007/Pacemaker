@@ -17,7 +17,8 @@ class Homepage:
         self.frame.pack()
         self.connection_status = ConnectionStatus(self.frame)
         self.mode_selection = ModeSelection(self.frame, self.username)
-        self.user_actions = UserActions(self.frame, self.username, self.mode_selection.variable, self.mode_selection.entries)
+        self.parameter_manager = self.mode_selection.parameter_manager
+        self.user_actions = UserActions(self.frame, self.username, self.mode_selection.variable, self.parameter_manager)
         self.logout = Logout(self.frame, root, self.show_login_page_callback)
         self.ecg_graph = ECGGraph()
 

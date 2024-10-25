@@ -47,12 +47,3 @@ class ModeSelection:
         
         variable.trace_add("write", on_mode_change)
         return variable
-
-    def create_save_button(self):
-        def save_params():
-            mode = self.variable.get()
-            current_params = self.parameter_manager.get_parameters()
-            self.save_user_parameters(mode, current_params)
-        
-        save_button = tk.Button(self.frame, text="Save Parameters", command=save_params)
-        save_button.pack()

@@ -4,16 +4,18 @@ import os
 import json
 
 class UserActions:
-    def __init__(self, frame, username, variable, entries):
+    def __init__(self, frame, username, variable, parameter_manager):
         self.frame = frame
         self.username = username
         self.variable = variable
-        self.entries = entries
+        self.parameter_manager = parameter_manager
         self.create_save_button()
 
     def save_parameters(self):
+        if not self.parameter_manager.validate_parameters():
+            return
         mode = self.variable.get()
-        current_params = {param: float(entry.get()) for param, entry in self.entries.items()}
+        current_params = self.parameter_manager.get_parameters()
         self.save_user_parameters(mode, current_params)
         print("Updated parameters:", current_params)
 
