@@ -4,7 +4,7 @@ from homepage.submodules.connection.connection import ConnectionStatus
 from homepage.submodules.mode_selection import ModeSelection
 from homepage.submodules.user_actions import UserActions
 from homepage.submodules.logout.logout import Logout
-from homepage.submodules.ecg_test import ECGGraph
+from homepage.submodules.ecg import ECGGraph
 
 class Homepage:
     def __init__(self, username, show_login_page_callback):
