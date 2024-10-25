@@ -1,14 +1,12 @@
 # login_page/login.py
 import tkinter as tk
-from tkinter import messagebox, Menu
-from homepage.homepage import show_homepage
-import json
+from tkinter import messagebox
 from user_data.user_auth import register_user, authenticate_user
 
-
 class LoginPage:
-    def __init__(self, root):
+    def __init__(self, root, show_homepage_callback):
         self.root = root
+        self.show_homepage_callback = show_homepage_callback
         self.root.title("Login")
         self.create_widgets()
 
@@ -47,7 +45,7 @@ class LoginPage:
         password = self.entry_password.get()
         if authenticate_user(username, password):
             self.root.destroy()
-            show_homepage(username)
+            self.show_homepage_callback(username)
         else:
             messagebox.showerror("Error", "Invalid username or password")
 
@@ -62,8 +60,4 @@ class LoginPage:
 
     def close_program(self):
         self.root.destroy()
-
-def show_login_page():
-    root = tk.Tk()
-    LoginPage(root)
-    root.mainloop()
+        
