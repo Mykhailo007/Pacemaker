@@ -1,5 +1,6 @@
 # main.py
-from login_page.login import show_login_page
+from navigation.page_navigator import PageNavigator
 
-# Start the login process
-show_login_page()
+if __name__ == "__main__":
+    navigator = PageNavigator()
+    navigator.start()
