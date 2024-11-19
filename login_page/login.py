@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import messagebox, Menu
 from homepage.homepage import show_homepage
 import json
+import sys
 from user_data.user_auth import register_user, authenticate_user
 
 
@@ -62,6 +63,7 @@ class LoginPage:
 
     def close_program(self):
         self.root.destroy()
+        sys.exit()
 
 def show_login_page():
     root = tk.Tk()
