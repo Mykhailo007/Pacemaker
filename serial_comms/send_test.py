@@ -3,22 +3,22 @@ import struct
 import time
 
 # Serial port configuration
-port_name = 'COM6'  # Change this to your COM port
+port_name = 'COM3'  # Change this to your COM port
 baud_rate = 115200
 
 # Packet structure
 SYNC = 0x16
 FN_CODE_SET = 0x55
 FN_CODE_ECHO = 0x22
-RED_ENABLE = 1
-GREEN_ENABLE = 1
-BLUE_ENABLE = 1
+RED_ENABLE = 0  # Red OFF
+GREEN_ENABLE = 1  # Green ON
+BLUE_ENABLE = 1  # Blue ON
 OFF_TIME = 1000  # example off time in milliseconds
 SWITCH_TIME = 500  # example switch time in milliseconds
 
 def create_packet(fn_code, red_enable, green_enable, blue_enable, off_time, switch_time):
     """Pack data into the specified format."""
-    packet = struct.pack('<BBBBIH', SYNC, fn_code, red_enable, green_enable, blue_enable, off_time, switch_time)
+    packet = struct.pack('<BBBBBIH', SYNC, fn_code, red_enable, green_enable, blue_enable, off_time, switch_time)
     return packet
 
 def send_packet(packet):
@@ -36,6 +36,8 @@ def send_packet(packet):
         ser.close()
     except serial.SerialException as e:
         print(f"Error opening serial port: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 # Example usage
 packet = create_packet(FN_CODE_SET, RED_ENABLE, GREEN_ENABLE, BLUE_ENABLE, OFF_TIME, SWITCH_TIME)
