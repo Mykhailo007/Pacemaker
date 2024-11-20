@@ -2,71 +2,79 @@ import serial
 import struct
 
 def serial_out(packet, selected_mode):
-  
-  st = struct.Struct('<BBBBddBBddHHHBBBBBB')
+    
+    # Format string for parameters:
+    # H: uint16 (2 bytes)
+    # d: double (8 bytes)
+    st = struct.Struct('<HHHH8d8dHHHHHdHHHB')
 
-  start_bit = bytes([0x16])
-  fn_code = bytes([0x55])
-  
-  LRL = int(packet[0])
-  URL = int(packet[1])
-  MSR = int(packet[2])
-  A_AMP = float(packet[3])
-  A_PW = float(packet[4])
-  V_AMP = float(packet[5])
-  V_PW = float(packet[6])
-  A_SENS = float(packet[7])
-  V_SENS = float(packet[8])
-  ARP = int(packet[9])
-  VRP = int(packet[10])
-  PVARP = int(packet[11])
-  PVARP_EXT = int(packet[12])
-  HYST = int(packet[13])
-  RATE_SMOOTH = int(packet[14])
-  ATR_DUR = int(packet[15])
-  ATR_FALLmode = int(packet[16])
-  ATR_FALLtime = int(packet[17])
-  
-  activity_threshold = {
-    "v-low": 0,
-    "low": 1,
-    "med-low": 2,
-    "med": 3,
-    "med-high": 4,
-    "high": 5,
-    "v-high": 6
-  }
-  
-  ACTTHRESH = activity_threshold(packet[18])
-  REACT_TIME = int(packet[19])
-  RESP_FACTOR = int(packet[20])
-  REC_TIME = float(packet[21])
-  
-  port = 'COM6'
-  
-  uC = None
-  
-  try:
-    uC = serial.Serial(port, baudrate=115200, timeout=1)
+    start_bit = bytes([0x16])
+    fn_code = bytes([0x55])
     
-    serial_data = st.pack(
-      start_bit, fn_code, int(selected_mode), LRL, URL, MSR, A_AMP, A_PW, V_AMP, V_PW, A_SENS, V_SENS, ARP, VRP, PVARP, PVARP_EXT, HYST, RATE_SMOOTH, ATR_DUR, ATR_FALLmode, ATR_FALLtime, ACTTHRESH, REACT_TIME, RESP_FACTOR, REC_TIME
-    )
+    # Parameters matching MATLAB rxdata structure
+    #Current_Mode = int(packet[0])       # uint16
+    LRL = int(packet[0])                # uint16
+    URL = int(packet[1])                # uint16
+    Max_Sensor_Rate = int(packet[2])    # uint16
+    A_Amplitude = float(packet[3])   # double
+    V_Amplitude = float(packet[4])  # double
+    A_Pulse_Width = int(packet[5])     # uint16
+    V_Pulse_Width = int(packet[6])     # uint16
+    A_Sensitivity = float(packet[7]) # double
+    V_Sensitivity = float(packet[8]) # double
+    VRP = int(packet[9])            # uint16
+    ARP = int(packet[10])            # uint16
+    PVARP = int(packet[11])          # uint16
+    Hysteresis = int(packet[12])        # uint16
+    Rate_Smoothing = int(packet[13])    # uint16
+    activity_threshold_map = {
+        "V-Low": 0,
+        "Low": 1,
+        "Med-Low": 2,
+        "Med": 3,
+        "Med-High": 4,
+        "High": 5,
+        "V-High": 6
+    }
     
-    print("Packet sent:", ' '.join(f"{x:02x}" for x in serial_data))
-    print("Packet length:", len(serial_data))
+    Activity_Threshold = activity_threshold_map[data[14]]
+    Reaction_Time = int(packet[15])     # uint16
+    Response_Factor = int(packet[16])    # uint16
+    Recovery_Time = int(packet[17])      # uint16
+    #Green_Led = 1                       # uint8
     
-    uC.write(serial_data)
+    port = 'COM6'
     
-    response = st.unpack(serial_data)
-    print("Response received:", ' '.join(f"{x:02x}" for x in response))
+    uC = None
     
-  except serial.SerialException as e:
-    print(f"Error opening serial port: {e}")
+    try:
+      uC = serial.Serial(port, baudrate=115200)
+    # Pack data according to struct format
+      data = st.pack(
+          int(selected_mode), LRL, URL, Max_Sensor_Rate,
+          A_Amplitude, V_Amplitude,
+          A_Pulse_Width, V_Pulse_Width,
+          A_Sensitivity, V_Sensitivity,
+          VRP, ARP, PVARP,
+          Hysteresis, Rate_Smoothing,
+          Activity_Threshold,
+          Reaction_Time, Response_Factor, Recovery_Time,
+          # Green_Led
+      )
+      
+      print(data)
+      print(len(data))
+      
+      uC.write(start_bit + fn_code + data)
+      
+      # Unpack data for debugging
+      unpacked = st.unpack(data)
+      print(unpacked)
+      
+    except serial.SerialException as e:
+      print(f"Error: {e}")
+      
+    finally:
+      if uC and uC.is_open:
+        uC.close()
     
-  except Exception as e:
-    print(f"An unexpected error occurred: {e}")
-    
-  finally:
-    if uC is not None:
-      uC.close()
