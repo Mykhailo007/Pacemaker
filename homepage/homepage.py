@@ -1,9 +1,9 @@
 # homepage.py
 import tkinter as tk
 from tkinter import ttk
-from submodules.mode_selection import create_mode_dropdown, create_parameters, create_save_button
-from submodules.logout.logout import logout
-from ecg_test import display_ecg_graph
+from homepage.submodules.mode_selection import create_mode_dropdown, create_parameters, create_save_button
+from .submodules.logout.logout import logout
+from homepage.ecg_test import display_ecg_graph
 
 import wmi
 import io
